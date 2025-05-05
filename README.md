@@ -151,3 +151,37 @@ Check that ner_counts.tsv accurately lists place names and their counts from Jan
 Review the cleaned names to ensure duplicates and variations have been merged properly.
 
 Confirm that the extraction and cleaning steps have improved the recognition and consistency of place names.
+
+## Creating a Gazetteer with Coordinates for NER Place Names
+
+In this phase of the project, we utilized geocoding to determine the latitude and longitude for all the place names extracted through Named Entity Recognition (NER) from the ner_counts.tsv file. Our objective was to create a gazetteer file named NER_gazetteer.tsv, which includes three columns: place name, latitude, and longitude. For any locations where we could not automatically find coordinates, we marked them as “NA” and later conducted a manual lookup for those coordinates.
+
+### Important Things to Know regarding geonames
+
+We utilized the GeoNames API, which requires a free username for access. The API has limitations on the number of requests you can make, so we incorporated pauses to prevent exceeding those limits. If you would like to run this yourself, you will need to sign up for a GeoNames account and replace the username in the script accordingly.
+
+### How the script works
+
+**Using the GeoNames API to Get Coordinates**
+
+We developed a function that sends a request to the GeoNames API for each place name. The API searches for the best match and returns the corresponding latitude and longitude coordinates. We included a brief pause between each one to prevent overwhelming the server with rapid requests. If the API cannot find any results for a particular place, the function simply returns no data.
+
+
+**Reading Place Names and Getting Coordinates**
+
+We opened the ner_counts.tsv file, which contains all the place names extracted from the news articles. For each place, we used a function to retrieve its coordinates. If the coordinates were found, we saved them along with the corresponding place name. If the coordinates could not be determined, we recorded the place name with "NA" for both latitude and longitude.
+
+
+**Writing the Gazetteer File**
+
+We created a new file named NER_gazetteer.tsv, where we stored all the place names along with their coordinates in a simple table format consisting of three columns: place, latitude, and longitude.
+
+
+**Manually Adding Missing Coordinates**
+
+After the script ran, we checked the gazetteer file for any places marked with “NA.” For those, we searched manually using Google Maps or other sources to find their coordinates and added them to the file. We also made a note of all the places we had to look up manually.
+
+### Verifying Results
+
+Verify that NER_gazetteer.tsv includes all place names from ner_counts.tsv along with their corresponding coordinates. Ensure that there are no missing or duplicated place names. Confirm that manual additions are accurately recorded and noted in the README file.
+
