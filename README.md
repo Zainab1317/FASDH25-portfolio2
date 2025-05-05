@@ -53,25 +53,20 @@ You must have Python installed with the following libraries:
 
 
 ### How the Script Works
-**Load the Gazetteer**
 
-Reads the file geonames_gaza_selection.tsv, which contains place names along with their alternate spellings.
+**Loading the Gazetteer**
 
-Constructs a comprehensive regex pattern for each place by combining all alternate names, enhancing the accuracy and recall of place name recognition.
+We began by looking the geonames_gaza_selection.tsv file, which contains a list of place names along with their alternate spellings. To ensure we captured as many variations as possible, we created a robust regex pattern that would work on all place names in the file. This approach enabled us to recognize place names even if they appeared with different spellings or formats in the articles.
 
-**Process the Articles**
+**Processing the Articles**
 
-Skips any articles published before October 7, 2023.
+We reviewed all the news articles, excluding any published before October 7, 2023, as our focus was on the current conflict. For each article published after that date, we applied our regex patterns in a case-insensitive manner to identify all possible occurrences of place names. We then recorded how many times each place was mentioned and organized the counts by month to observe how coverage evolved.
 
-For each remaining article, performs case-insensitive regex matching to identify all occurrences of place names.
+**Outputting the Results**
 
-Tracks and aggregates the number of mentions for each place on a monthly basis.
+Finally, we displayed the monthly counts for each location to provide a clear overview of which places received the most attention in the news. Additionally, we saved all this information in a TSV file, allowing us to analyze or visualize the data easily at a later time. 
 
-**Output Results**
-
-Displays the monthly mention counts for each place.
-
-Saves the aggregated data to a TSV file for further analysis and visualization.
+By combining the gazetteer with flexible regex patterns, we enhanced the accuracy and robustness of our place name extraction, even when names were spelled differently or presented in various formats throughout the articles.
 
 ### Verifying results
 
