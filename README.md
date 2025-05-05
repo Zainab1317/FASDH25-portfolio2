@@ -112,9 +112,10 @@ Defines the path to the articles folder: /content/FASDH25-portfolio2/articles.
 
 **Filtering Articles by Date**
 
-Lists all files in the articles directory.
+Loops through all files in the articles directory.
 
 Selects only those articles published in January 2024 by checking if the filename starts with 2024-01.
+makes them into a different list called jan_2024_files.
 
 
 **Extracting Place Names**
@@ -130,7 +131,7 @@ Counts how many times each place name appears across all January 2024 articles.
 
 Removes possessive endings (e.g. "'" removes commas and apostrophes).
 
-Strips punctuation and standardize names.
+Strips punctuation, standardizes names and removes THE before names to make then easily searchable. 
 
 Adds up the counts of cleaned place names to combine duplicates.
 
