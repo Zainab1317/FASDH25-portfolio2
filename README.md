@@ -32,6 +32,7 @@ This folder is essential for Part 3 of the project, where these files will be us
 
 ### Scripts folder
 
+There are 5 files in this folder that contrbutes 
 
 ### README
 
@@ -117,7 +118,7 @@ makes them into a different list called jan_2024_files.
 
 For each selected article, reads the text content.
 
-Uses Stanza’s NER pipeline to identify named entities of types GPE (Geo-Political Entities), LOC (Locations), or FAC (Facilities).
+Uses Stanza’s NER pipeline to identify named entities of types GPE (Geo-Political Entities), LOC (Locations).
 
 Counts how many times each place name appears across all January 2024 articles.
 
@@ -149,7 +150,7 @@ Confirm that the extraction and cleaning steps have improved the recognition and
 
 ## 3) Creating a Gazetteer with Coordinates for NER Place Names
 
-In this phase of the project, we utilized geocoding to determine the latitude and longitude for all the place names extracted through Named Entity Recognition (NER) from the ner_counts.tsv file. Our objective was to create a gazetteer file named NER_gazetteer.tsv, which includes three columns: place name, latitude, and longitude. For any locations where we could not automatically find coordinates, we marked them as “NA” and later conducted a manual lookup for those coordinates.
+In this phase of the project, we utilized geocoding to determine the latitude and longitude for all the place names extracted through Named Entity Recognition (NER) from the ner_counts.tsv file. Our objective was to create a gazetteer file named ner_gazetteer.tsv, which includes three columns: place name, latitude, and longitude. For any locations where we could not automatically find coordinates, we marked them as “NA”.
 
 ### Important Things to Know regarding geonames
 
@@ -169,7 +170,7 @@ We opened the ner_counts.tsv file, which contains all the place names extracted 
 
 **Writing the Gazetteer File**
 
-We created a new file named NER_gazetteer.tsv, where we stored all the place names along with their coordinates in a simple table format consisting of three columns: place, latitude, and longitude.
+We created a new file named ner_gazetteer.tsv, where we stored all the place names along with their coordinates in a simple table format consisting of three columns: place, latitude, and longitude.
 
 
 **Manually Adding Missing Coordinates**
@@ -178,11 +179,11 @@ After the script ran, we checked the gazetteer file for any places marked with �
 
 ### Verifying Results
 
-Verify that NER_gazetteer.tsv includes all place names from ner_counts.tsv along with their corresponding coordinates. Ensure that there are no missing or duplicated place names. Confirm that manual additions are accurately recorded and noted in the README file.
+Verify that ner_gazetteer.tsv includes all place names from ner_counts.tsv along with their corresponding coordinates. Ensure that there are no missing or duplicated place names. Confirm that manual additions are accurately recorded and noted in the README file.
 
 ## 4A) Visualizing Place Names Extracted through Regex Mapping with Animation
 
-In this part of the project, we created an interactive, animated map to show how often different places in Gaza were mentioned in news articles over time. The data we used came from the regex_counts.tsv file, which contains the number of times each place was mentioned each month, extracted using regex and a gazetteer. This visualization helps us see patterns and changes in media coverage as the conflict unfolded.
+In this part of the project, we created an interactive, animated map to show how often different places in Gaza were mentioned in news articles over time. The data we used came from the regex_counts.tsv file, which contains the number of times each place was mentioned each month, extracted using regex and a gazetteer. This visualization helps us see patterns and changes in media coverage as the conflict unfolded and helps us visualise the relative frequency of place names mentioned in the articles. 
 
 ### Libraries required for this script
 
@@ -194,7 +195,7 @@ pandas (To load and merge data from TSV files)
 
 **Prepare the Data**:
 
-To obtain the monthly mention counts for different places, we loaded the `regex_counts.tsv` file. Additionally, we loaded the `ner_gazetteer.tsv` file, which gives each location's latitude and longitude. Then, in order to connect the coordinates of each location with the matching mention counts, we combined these two datasets using the "place" column.
+To obtain the monthly mention counts for different places, we loaded the `regex_counts.tsv` file. Additionally, we loaded the `ner_gazetteer.tsv` file, which gives each location's latitude and longitude. Then, in order to connect the coordinates of each location with the matching mention counts, we merged these two datasets using the "place" column.
 
 
 **Creating Animated Map**:
@@ -207,9 +208,6 @@ We used Plotly Express to create an interactive map. Each location is represente
 We created an interactive HTML file (regex_map.html) for the map, allowing anyone to explore it in a web browser. We also generated a static image (regex_map.png) for easy reference.
 
 
-### Verifying outputs:
-
-We ensured that every location in our dataset was represented on the map. We verified that the sizes of the markers corresponded to the frequency with which each place was mentioned. We played the animation to confirm that the month-to-month changes appeared accurate. If any locations were missing from the map, we checked for missing coordinates in the gazetteer and added them as necessary.
 
 ## 4B) Mapping NER-Extracted Place Names:
 
@@ -227,7 +225,7 @@ plotly.express
 
 **Prepare data**:
 
-We loaded the `ner_counts.tsv` file, which contains the number of times each place was mentioned in January 2024, as extracted by Named Entity Recognition (NER). Additionally, we loaded the `ner_gazetteer.tsv` file, which provides the latitude and longitude of each place based on our previous geocoding process. Then, we merged these two datasets using the "place" column to link each place's coordinates with its mention count. We ensured that all counts were treated as numerical values and removed any rows that contained missing values for either the count or the coordinates.
+We loaded the `ner_counts.tsv` file, which contains the number of times each place was mentioned in January 2024, as extracted by Named Entity Recognition (NER). Additionally, we loaded the `ner_gazetteer.tsv` file, which provides the latitude and longitude of each place based on our previous geocoding process. Then, we merged these two datasets using the "place" column to link each place's coordinates with its mention count.
 
 
 **Creation of map**:
@@ -241,13 +239,14 @@ We saved the map as ner_map.html, an HTML file that can be seen on a web browse
 
 ### Verifying results
 
-We made sure that the map included every place from the NER extraction. We confirmed that the marker sizes matched the number of mentions in the data. Additionally, we looked for any missing or inaccurate coordinates and made the required corrections.
+We made sure that the map included every place from the NER extraction. We confirmed that the marker sizes matched the number of mentions in the data. Additionally.
 
 ## Self critical anaylsis:
 
 After completing the codes for Mini Project 2 and running it to visualize both the regex map and the NER map, we have identified certain issues. With more time, we believe several changes could improve the project. Based on our observations, here are the potential improvements we could make:
 
-One weakness identified in the project is the way city names are processed. Currently, the code only removes articles like "the" and punctuation, which means that when we analyze a phrase like "the city of London," the phrase remains partially intact. This results in the phrase being treated as a different entity. Improving this functionality to clear out more unnecessary words would enhance the accuracy of our data. Additionally, when using GeoNames to verify locations, it's important to ensure that the latitude and longitude coordinates are accurate on the map. This can help prevent any inaccuracies in location data. Another limitation is that the project only considers articles specifically about Gaza, which could introduce bias. With more time, we could expand this aspect by comparing coverage of various cities from different media outlets to see how they report on similar events. Moreover, while the initial code detected places outside of Gaza, the focus of the project was solely on that city. Expanding the project to include two cities would provide a comparative view of how war is reported in different locations over time. Lastly, the named entity recognition (NER) model used could be improved. Although it detected name variants and misspellings, it lacked the contextual understanding needed for accurate recognition. A more specialized NER model would enhance the project's effectiveness.
+One weakness identified in the project is the way city names are processed. Currently, the code only removes articles like "the" and punctuation, which means that when we analyze a phrase like "the city of London," the phrase remains partially intact. This results in the phrase being treated as a different entity. Improving this functionality to clear out more unnecessary words would enhance the accuracy of our data. Additionally, when using GeoNames to verify locations, it's important to ensure that the latitude and longitude coordinates are accurate on the map. This can help prevent any inaccuracies in location data. Another limitation is that the project only considers articles specifically about Gaza, which could introduce bias. With more time, we could expand this aspect by comparing coverage of various cities from different media outlets to see how they report on similar events. Moreover, while the initial code detected places outside of Gaza, the focus of the project was solely on that city. Expanding the project to include two cities would provide a comparative view of how war is reported in different locations over time. Lastly, the named entity recognition (NER) model used could be improved. Although it detected name variants and misspellings, it lacked the contextual understanding needed for accurate recognition. A more specialized NER model would enhance the project's effectiveness. Lastly, there was a significant issue that involved manually removing all items from ner_counts.tsv.tsv that were not place names. This task is quite tedious, as there are numerous proper names and other entries that do not qualify as place names. With more time, we could develop a specific code to automate the removal of any non-place names, which would greatly improve the process.
+
 
 This project was more challenging, but with the provided slides and some assistance, we were able to write our code and achieve an output.
 
