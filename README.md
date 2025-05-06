@@ -211,7 +211,37 @@ We created an interactive HTML file (regex_map.html) for the map, allowing anyon
 
 We ensured that every location in our dataset was represented on the map. We verified that the sizes of the markers corresponded to the frequency with which each place was mentioned. We played the animation to confirm that the month-to-month changes appeared accurate. If any locations were missing from the map, we checked for missing coordinates in the gazetteer and added them as necessary.
 
+## 4B) Mapping NER-Extracted Place Names:
 
+This section directly builds upon the mapping work we completed previously in the project. We mapped location names that were extracted using a gazetteer and regex in part 4A to demonstrate how their mentions evolved throughout time. In part 4B, we map the frequency of place names that were extracted for January 2024 using Named Entity Recognition (NER). This enables us to compare the outcomes of the two approaches and observe the geographic distribution of news coverage after January 2024.
+
+### Libraries required
+
+The following python libraries are required to run this part of the code
+
+pandas
+
+plotly.express
+
+### How the script works
+
+**Prepare data**:
+
+We loaded the `ner_counts.tsv` file, which contains the number of times each place was mentioned in January 2024, as extracted by Named Entity Recognition (NER). Additionally, we loaded the `ner_gazetteer.tsv` file, which provides the latitude and longitude of each place based on our previous geocoding process. Then, we merged these two datasets using the "place" column to link each place's coordinates with its mention count. We ensured that all counts were treated as numerical values and removed any rows that contained missing values for either the count or the coordinates.
+
+
+**Creation of map**:
+
+We used `plotly.express.scatter_geo` to create a map displaying the locations of various places. The size of each marker indicates the frequency of mentions, with larger markers representing more frequent mentions. Different colors for the markers help distinguish between the various places. The map is titled “NER Place Frequencies - January 2024,” and it uses the actual map of the world for projection to improve geographic accuracy.
+
+
+**Output files**:
+
+We saved the map as ner_map.html, an HTML file that can be seen on a web browser by anybody. For easy access, we also exported a static image (ner_map.png).
+
+### Verifying results
+
+We made sure that the map included every place from the NER extraction. We confirmed that the marker sizes matched the number of mentions in the data. Additionally, we looked for any missing or inaccurate coordinates and made the required corrections.
 
 ## Advantages and Disadvantages of using ner and gazetteers with regex 
 
