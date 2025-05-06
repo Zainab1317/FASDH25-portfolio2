@@ -37,7 +37,7 @@ This folder is essential for Part 3 of the project, where these files will be us
 
 The repository also contains this file which documents the entire project.
 
-## Using gazetteer and regex to extract all place names in Gaza from the corpus
+## 2A) Using gazetteer and regex to extract all place names in Gaza from the corpus
 
 The objective of the first task is to extract all place names from a large collection of news articles using a gazetteer, which serves as a geographical index or dictionary. Next, the recognition of place names is enhanced by incorporating alternate spellings from another column through the use of regular expression (regex) techniques. Finally, the frequency of each place name mentioned in the articles is counted on a monthly basis and laslty export the results to a tsv file using Pandas library for visualization
 
@@ -72,7 +72,7 @@ By combining the gazetteer with flexible regex patterns, we enhanced the accurac
 
 After running the script, verify that the output in the regex_counts.tsv file is accurate. Compare the extracted place names against the gazetteer to identify any missing locations. Additionally, review the spelling of the place names to assess whether the regex patterns have improved recognition, and determine if further refinements to the regex can enhance the results.
 
-## Using Stanza to Extract Place Names from Gaza Articles
+## 2B) Using Stanza to Extract Place Names from Gaza Articles
 
 This part of the project focuses on extracting all place names mentioned in news articles about the Gaza war, specifically those published in January 2024. We used Stanza, a Python NLP library, to automatically identify and count place names in the text. This script processes the relevant files, cleans up name variations, and exports the results for further analysis and visualization.
 
@@ -147,7 +147,7 @@ Review the cleaned names to ensure duplicates and variations have been merged pr
 
 Confirm that the extraction and cleaning steps have improved the recognition and consistency of place names.
 
-## Creating a Gazetteer with Coordinates for NER Place Names
+## 3) Creating a Gazetteer with Coordinates for NER Place Names
 
 In this phase of the project, we utilized geocoding to determine the latitude and longitude for all the place names extracted through Named Entity Recognition (NER) from the ner_counts.tsv file. Our objective was to create a gazetteer file named NER_gazetteer.tsv, which includes three columns: place name, latitude, and longitude. For any locations where we could not automatically find coordinates, we marked them as “NA” and later conducted a manual lookup for those coordinates.
 
@@ -180,7 +180,40 @@ After the script ran, we checked the gazetteer file for any places marked with �
 
 Verify that NER_gazetteer.tsv includes all place names from ner_counts.tsv along with their corresponding coordinates. Ensure that there are no missing or duplicated place names. Confirm that manual additions are accurately recorded and noted in the README file.
 
-### Advantages and Disadvantages of using ner and gazetteers with regex 
+## 4A) Visualizing Place Names Extracted through Regex Mapping with Animation
+
+In this part of the project, we created an interactive, animated map to show how often different places in Gaza were mentioned in news articles over time. The data we used came from the regex_counts.tsv file, which contains the number of times each place was mentioned each month, extracted using regex and a gazetteer. This visualization helps us see patterns and changes in media coverage as the conflict unfolded.
+
+### Libraries required for this script
+
+plotly.express (For creating interactive maps and animations)
+
+pandas (To load and merge data from TSV files)
+
+### How the script works:
+
+**Prepare the Data**:
+
+To obtain the monthly mention counts for different places, we loaded the `regex_counts.tsv` file. Additionally, we loaded the `ner_gazetteer.tsv` file, which gives each location's latitude and longitude. Then, in order to connect the coordinates of each location with the matching mention counts, we combined these two datasets using the "place" column.
+
+
+**Creating Animated Map**:
+
+We used Plotly Express to create an interactive map. Each location is represented by a marker on the map. The size of each marker indicates how often a location was mentioned; the larger the marker, the more mentions it received. Different colors for the markers help distinguish between various locations. The map is animated by month, allowing us to observe how the focus of news coverage shifted over time.
+
+
+**Output for this script**
+
+We created an interactive HTML file (regex_map.html) for the map, allowing anyone to explore it in a web browser. We also generated a static image (regex_map.png) for easy reference.
+
+
+### Verifying outputs:
+
+We ensured that every location in our dataset was represented on the map. We verified that the sizes of the markers corresponded to the frequency with which each place was mentioned. We played the animation to confirm that the month-to-month changes appeared accurate. If any locations were missing from the map, we checked for missing coordinates in the gazetteer and added them as necessary.
+
+
+
+## Advantages and Disadvantages of using ner and gazetteers with regex 
 
 Using these removes human effort and improves these results by being case sensitive to deferentiate between place names and people names. The loop automatically opens the text files and extract the place names. This blended approach ensures accuracy and improved coverage by cross checking the NER results agaist the gazetteer.The place names identified were also accurate enought that the results of the TSV were searched on geonames to yeild results.NER provides flexibility and contextual understanding, while the gazetteer ensures precision and consistency. This dual method can significantly improve both recall and accuracy when analyzing geographical references in text.
 This can be time consuming and resource heavy especially with large datasets and corpi. This might also require manual effort to maintain and update the gazetteer. There is also a risk of redundancy or conflict if entities are matched differently by each method, which can complicate the process of merging and interpreting the results. Finally, integrating both techniques into a single workflow can add complexity in terms of code, data management, and debugging, requiring more technical overhead than using either method alone.
