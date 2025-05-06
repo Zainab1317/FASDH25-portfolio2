@@ -15,7 +15,7 @@ def write_tsv(rows, column_list, path):
 #Setup paths
 #defining folder where articles are present
 repo_path = "FASDH25-portfolio2"
-folder = r"C:\Users\batoo\Downloads\FASDH25-portfolio2\articles"
+folder = r"C:\Users\batoo\Downloads\FASDH25-portfolio2\articles" #1) used chatgpt to add "r" before the path so it works
 #define path and load gazetteer from the tsv file having place names and alternate names
 gazetteer_path = r"C:\Users\batoo\Downloads\FASDH25-portfolio2\gazetteers\geonames_gaza_selection.tsv" 
 
@@ -50,7 +50,7 @@ for row in rows[1:]:
 
 # build a regex pattern that will work to find all names and match diffrent varianats of the place names aswell
 #using re.escape to escape any special characters in place names and "|" is used for alternation
-    regex_pattern = "|".join (re.escape(name) for name in name_variants)
+    regex_pattern = "|".join (re.escape(name) for name in name_variants) #2) used chatgpt in writing rregex
     #includes all names and their variants with numbers
     patterns[asciiname] = {"pattern": regex_pattern, "count": 0} 
 
@@ -74,7 +74,8 @@ for filename in os.listdir(folder):
 #loop through each places and search for matches in text
     for place in patterns:
         pattern = patterns[place]["pattern"]
-        matches = re.findall(pattern, text, re.IGNORECASE) #find all matches of the place names
+        #find all matches of the place names
+        matches = re.findall(pattern, text, re.IGNORECASE) #3) used chatgpt to understand "re.IGNORECASE"
         count = len(matches) #number of times the place was found 
         patterns[place]["count"] += count #add the number of times the place was found into total places
 
