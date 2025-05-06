@@ -32,7 +32,7 @@ This folder is essential for Part 3 of the project, where these files will be us
 
 ### Scripts folder
 
-This folder contains five files related to our mini project. The file **regex_script_final** is for Part 2A and includes the necessary code. The **build_gazetteer** file is designated for Part 3. The **gaza_ner2_saad_shahryar_zainab** file is intended for Part 2B. Lastly, there is a **final_collab** file, which was created for collaborative work and to facilitate better teamwork among our members.
+This folder contains five files related to our mini project. The file **regex_script_final.py** is for Part 2A and includes the necessary code. The **build_gazetteer.ipynb** file is designated for Part 3. The **Gaza_NER2_Shahryar_Saad_Zainab** file is intended for Part 2B. **stanza_script_shahryar.py** is a rough working script for the 2B code on idle. Lastly, there is a **Final.ipynb** file, which was created for collaborative work and to facilitate better teamwork among our members.
 
 ### Outputs folder
 
@@ -240,6 +240,34 @@ We saved the map as ner_map.html, an HTML file that can be seen on a web browse
 
 We made sure that the map included every place from the NER extraction. We confirmed that the marker sizes matched the number of mentions in the data. Additionally.
 
+## Advantages and Disadvantages of using ner and gazetteers with regex 
+
+Using these removes human effort and improves these results by being case sensitive to deferentiate between place names and people names. The loop automatically opens the text files and extract the place names. This blended approach ensures accuracy and improved coverage by cross checking the NER results agaist the gazetteer.The place names identified were also accurate enought that the results of the TSV were searched on geonames to yeild results.NER provides flexibility and contextual understanding, while the gazetteer ensures precision and consistency. This dual method can significantly improve both recall and accuracy when analyzing geographical references in text.
+This can be time consuming and resource heavy especially with large datasets and corpi. This might also require manual effort to maintain and update the gazetteer. There is also a risk of redundancy or conflict if entities are matched differently by each method, which can complicate the process of merging and interpreting the results. Finally, integrating both techniques into a single workflow can add complexity in terms of code, data management, and debugging, requiring more technical overhead than using either method alone.
+
+##  Image of final maps:
+
+![ner_map](https://github.com/user-attachments/assets/ea8b1624-555f-4c57-b523-ab2f88869000)
+
+![regex_map](https://github.com/user-attachments/assets/24f89d39-8e72-4473-bf0e-4ece85d24ad3)
+
+## Comparision of NER and Regex maps:
+
+The NER map and regex map display place names extracted from text, specifically focusing on the Gaza region. However, their approaches and accuracy differ.
+**Methodology:** The NER map employs Named Entity Recognition, which utilizes contextual understanding to accurately identify place names. In contrast, the regex map uses regular expressions, relying on fixed patterns for identification.
+
+**Precision:** The NER map extracts place names with greater precision due to its ability to understand context. The regex map, on the other hand, may overlook or duplicate entries if the formatting varies.
+
+**Location Specificity:** The NER map uses color coding to differentiate between closely located places, providing clearer visualization. Conversely, the regex map may have less distinct markers for minor locations and could potentially miss them altogether.
+
+**NER Advantages:**
+NER utilizes contextual understanding for precise identification of place names. NER can differentiate between geopolitical entities (such as cities and countries) and locations (including bodies of water and forests).
+
+**Regex Limitations:**
+Regular expression methods depend on fixed patterns, which can result in missed or duplicated entries if the text formatting varies. Regular expressions may also be less accurate in identifying locations due to their lack of contextual understanding.
+
+To enhance the accuracy of location detection using Named Entity Recognition (NER), one effective strategy is to merge location tokens that are within a certain proximity of each other in the original text to reduce ambiguity. For instance, "Springfield" and "Virginia" can be combined into "Springfield, Virginia." Additionally, it is important to verify that the identified locations are legitimate addresses within the region of interest.
+
 ## Self critical anaylsis:
 
 After completing the codes for Mini Project 2 and running it to visualize both the regex map and the NER map, we have identified certain issues. With more time, we believe several changes could improve the project. Based on our observations, here are the potential improvements we could make:
@@ -248,9 +276,3 @@ One weakness identified in the project is the way city names are processed. Curr
 
 
 This project was more challenging, but with the provided slides and some assistance, we were able to write our code and achieve an output.
-
-
-## Advantages and Disadvantages of using ner and gazetteers with regex 
-
-Using these removes human effort and improves these results by being case sensitive to deferentiate between place names and people names. The loop automatically opens the text files and extract the place names. This blended approach ensures accuracy and improved coverage by cross checking the NER results agaist the gazetteer.The place names identified were also accurate enought that the results of the TSV were searched on geonames to yeild results.NER provides flexibility and contextual understanding, while the gazetteer ensures precision and consistency. This dual method can significantly improve both recall and accuracy when analyzing geographical references in text.
-This can be time consuming and resource heavy especially with large datasets and corpi. This might also require manual effort to maintain and update the gazetteer. There is also a risk of redundancy or conflict if entities are matched differently by each method, which can complicate the process of merging and interpreting the results. Finally, integrating both techniques into a single workflow can add complexity in terms of code, data management, and debugging, requiring more technical overhead than using either method alone.
