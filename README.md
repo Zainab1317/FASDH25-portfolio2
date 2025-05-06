@@ -15,7 +15,7 @@ Overall, this mini project will explore data mining, NLP, geospatial analysi and
 
 ## Folder structure of repository FASDH25-portfolio2
 
-The repository contains 4 folders titled articles, gazetteers ,Scripts and output. It also has a README file
+The repository contains 5 folders titled articles, gazetteers ,Scripts and output. It also has a README file
 and gitignore.
 
 ### articles folder
@@ -32,7 +32,15 @@ This folder is essential for Part 3 of the project, where these files will be us
 
 ### Scripts folder
 
-There are 5 files in this folder that contrbutes 
+This folder contains five files related to our mini project. The file **regex_script_final** is for Part 2A and includes the necessary code. The **build_gazetteer** file is designated for Part 3. The **gaza_ner2_saad_shahryar_zainab** file is intended for Part 2B. Lastly, there is a **final_collab** file, which was created for collaborative work and to facilitate better teamwork among our members.
+
+### Outputs folder
+
+This folder contains all the outputs in TSV, PNG, and HTML formats for the project codes. The file **regex_counts.tsv** corresponds to part 2A, while **ner_counts.tsv** is the output for part 2B. The **ner_gazetteer.tsv** file is the output for part 3 of the project. The outputs for part 4B are found in **ner_map.html** and **ner_map.png**, whereas the output files for part 4A are **regex_map.png** and **regex_map.html**
+
+### Academic integrity folder
+
+This folder contains 2 files AI_documentation_shahryar_morani and AI_documentation_zainab_murtazaali. This is the documentation of the AI chats and help that we got from it.
 
 ### README
 
@@ -171,15 +179,6 @@ We opened the ner_counts.tsv file, which contains all the place names extracted 
 **Writing the Gazetteer File**
 
 We created a new file named ner_gazetteer.tsv, where we stored all the place names along with their coordinates in a simple table format consisting of three columns: place, latitude, and longitude.
-
-
-**Manually Adding Missing Coordinates**
-
-After the script ran, we checked the gazetteer file for any places marked with “NA.” For those, we searched manually using Google Maps or other sources to find their coordinates and added them to the file. We also made a note of all the places we had to look up manually.
-
-### Verifying Results
-
-Verify that ner_gazetteer.tsv includes all place names from ner_counts.tsv along with their corresponding coordinates. Ensure that there are no missing or duplicated place names. Confirm that manual additions are accurately recorded and noted in the README file.
 
 ## 4A) Visualizing Place Names Extracted through Regex Mapping with Animation
 
