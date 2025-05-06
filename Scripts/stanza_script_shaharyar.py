@@ -28,7 +28,7 @@ for file in jan_2024_files:
     doc = nlp(text)
     for sentence in doc.sentences:
       for entity in sentence.ents:
-        if entity.type in ["GPE", "LOC", "FAC"]:
+        if entity.type in ["GPE", "LOC"]:
           place = entity.text.strip()
           place_counts[place] = place_counts.get(place, 0) + 1
 
