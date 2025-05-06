@@ -180,3 +180,6 @@ After the script ran, we checked the gazetteer file for any places marked with â
 
 Verify that NER_gazetteer.tsv includes all place names from ner_counts.tsv along with their corresponding coordinates. Ensure that there are no missing or duplicated place names. Confirm that manual additions are accurately recorded and noted in the README file.
 
+### Advantages and Disadvantages of using ner and gazetteers with regex 
+
+Using these removes human effort and improves these results by being case sensitive to deferentiate between place names and people names. The loop automatically opens the text files and extract the place names. This blended approach ensures accuracy and improved coverage by cross checking the NER results agaist the gazetteer.The place names identified were also accurate enought that the results of the TSV were searched on geonames to yeild results. This can be time consuming and resource heavy especially with large datasets and corpi. This might also require manual effort to maintain and update the gazetteer. 
