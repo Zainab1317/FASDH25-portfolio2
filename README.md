@@ -243,6 +243,15 @@ We saved the map as ner_map.html, an HTML file that can be seen on a web browse
 
 We made sure that the map included every place from the NER extraction. We confirmed that the marker sizes matched the number of mentions in the data. Additionally, we looked for any missing or inaccurate coordinates and made the required corrections.
 
+## Self critical anaylsis:
+
+After completing the codes for Mini Project 2 and running it to visualize both the regex map and the NER map, we have identified certain issues. With more time, we believe several changes could improve the project. Based on our observations, here are the potential improvements we could make:
+
+One weakness identified in the project is the way city names are processed. Currently, the code only removes articles like "the" and punctuation, which means that when we analyze a phrase like "the city of London," the phrase remains partially intact. This results in the phrase being treated as a different entity. Improving this functionality to clear out more unnecessary words would enhance the accuracy of our data. Additionally, when using GeoNames to verify locations, it's important to ensure that the latitude and longitude coordinates are accurate on the map. This can help prevent any inaccuracies in location data. Another limitation is that the project only considers articles specifically about Gaza, which could introduce bias. With more time, we could expand this aspect by comparing coverage of various cities from different media outlets to see how they report on similar events. Moreover, while the initial code detected places outside of Gaza, the focus of the project was solely on that city. Expanding the project to include two cities would provide a comparative view of how war is reported in different locations over time. Lastly, the named entity recognition (NER) model used could be improved. Although it detected name variants and misspellings, it lacked the contextual understanding needed for accurate recognition. A more specialized NER model would enhance the project's effectiveness.
+
+This project was more challenging, but with the provided slides and some assistance, we were able to write our code and achieve an output.
+
+
 ## Advantages and Disadvantages of using ner and gazetteers with regex 
 
 Using these removes human effort and improves these results by being case sensitive to deferentiate between place names and people names. The loop automatically opens the text files and extract the place names. This blended approach ensures accuracy and improved coverage by cross checking the NER results agaist the gazetteer.The place names identified were also accurate enought that the results of the TSV were searched on geonames to yeild results.NER provides flexibility and contextual understanding, while the gazetteer ensures precision and consistency. This dual method can significantly improve both recall and accuracy when analyzing geographical references in text.
